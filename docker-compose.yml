@@ -24,6 +24,7 @@ services:
       - "80:3000"
     environment:
       - NODE_ENV=development
+      - WDS_SOCKET_PATH=0
     depends_on:
       - django
     command: npm start
