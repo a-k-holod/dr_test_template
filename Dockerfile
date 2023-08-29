@@ -11,6 +11,9 @@ ENV PATH="/opt/venv/bin:$PATH"
 #   && apt-get install nodejs \
 #   && curl -o- -L https://yarnpkg.com/install.sh | bash
 
+# Install yarn globally within the virtual environment
+RUN /opt/venv/bin/pip install --no-cache-dir yarn
+
 WORKDIR /app/backend
 
 # Install Python dependencies
