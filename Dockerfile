@@ -21,13 +21,13 @@ RUN pip install --no-cache-dir -r requirements/production.txt
 WORKDIR /app/frontend
 
 COPY ./frontend/package.json /app/frontend/
-RUN yarn install
+RUN /opt/venv/bin/yarn install
 
 # Add the rest of the code
 COPY . /app
 
 # Build static files
-RUN yarn build
+RUN /opt/venv/bin/yarn build
 
 # Have to move all static files other than index.html to root/
 # for whitenoise middleware
