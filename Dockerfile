@@ -37,9 +37,10 @@ RUN #/opt/venv/bin/yarn build
 WORKDIR /app/frontend/build
 
 # Make sure the files are copied to this directory
-COPY ./frontend/build/*.ico ./
-COPY ./frontend/build/*.js ./
-COPY ./frontend/build/*.json ./
+COPY ./*.ico ./
+COPY ./*.js ./
+COPY ./*.json ./
+
 RUN mkdir root && mv *.ico *.js *.json root
 
 # Collect static files
