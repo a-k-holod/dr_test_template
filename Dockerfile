@@ -4,7 +4,7 @@ FROM python:latest
 # Install curl, node, & yarn
 RUN apt-get -y install curl \
   && curl -sL https://deb.nodesource.com/setup_16.x | bash \
-  && apt-get install nodejs \
+  && apt-get install -y nodejs \
   && curl -o- -L https://yarnpkg.com/install.sh | bash
 
 WORKDIR /app/backend
