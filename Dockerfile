@@ -12,7 +12,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 #   && curl -o- -L https://yarnpkg.com/install.sh | bash
 
 # Install yarn globally within the virtual environment
-RUN /opt/venv/bin/pip install --no-cache-dir yarn
+RUN #/opt/venv/bin/pip install --no-cache-dir yarn
 
 WORKDIR /app/backend
 
@@ -24,13 +24,13 @@ RUN pip install --no-cache-dir -r requirements/production.txt
 WORKDIR /app/frontend
 
 COPY ./frontend/package.json /app/frontend/
-RUN /opt/venv/bin/yarn install
+RUN #/opt/venv/bin/yarn install
 
 # Add the rest of the code
 COPY . /app
 
 # Build static files
-RUN /opt/venv/bin/yarn build
+RUN #/opt/venv/bin/yarn build
 
 # Have to move all static files other than index.html to root/
 # for whitenoise middleware
