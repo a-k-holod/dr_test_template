@@ -1,0 +1,18 @@
+[
+  {
+    "model": "contrib.product",
+    "pk": 1,
+    "fields": {
+      "name": "Product 1",
+      "price": 10.99
+    }
+  },
+  {
+    "model": "contrib.product",
+    "pk": 2,
+    "fields": {
+      "name": "Product 2",
+      "price": 19.99
+    }
+  }
+]

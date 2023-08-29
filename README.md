@@ -14,3 +14,13 @@ docker-compose run --rm django pytest
 
 ## Deployment
 You can check how to deploy your app to Heroku [here](https://github.com/ohduran/cookiecutter-react-django#deploy-to-heroku)
+
+python manage.py migrate
+docker-compose exec django python manage.py migrate
+
+python manage.py shell
+from contrib.models import Product
+products = Product.objects.all()
+print(products)
+
+python manage.py loaddata fixtures/products.json

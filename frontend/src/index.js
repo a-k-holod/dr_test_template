@@ -5,12 +5,14 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Test from "./components/Test";
 import Home from "./components/Home";
+import ProductList from "./components/ProductList";
 
 ReactDOM.render(
     <Router>
         <Routes>
             <Route exact path="/" element={<Home/>}/>
             <Route path="/test" element={<Test/>}/>
+            <Route path="/list" element={<ProductList/>}/>
         </Routes>
     </Router>,
     document.getElementById('root'));
