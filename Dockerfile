@@ -6,6 +6,7 @@ FROM python:latest
 #  && curl -sL https://deb.nodesource.com/setup_16.x | bash \
 #  && apt-get install nodejs \
 #  && curl -o- -L https://yarnpkg.com/install.sh | bash
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
 WORKDIR /app/backend
 
