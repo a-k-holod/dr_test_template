@@ -1,30 +1,33 @@
 # Use an official Python runtime as a parent image
 FROM python:latest
 
-# Install curl, node, & yarn
-#RUN apt-get -y install curl \
-#  && curl -sL https://deb.nodesource.com/setup_16.x | bash \
-#  && apt-get install nodejs \
-#  && curl -o- -L https://yarnpkg.com/install.sh | bash
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+# Create and activate a virtual environment
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Install curl, node, & yarn (if needed)
+# RUN apt-get -y install curl \
+#   && curl -sL https://deb.nodesource.com/setup_16.x | bash \
+#   && apt-get install nodejs \
+#   && curl -o- -L https://yarnpkg.com/install.sh | bash
 
 WORKDIR /app/backend
 
 # Install Python dependencies
 COPY ./backend/requirements /app/backend/requirements
-RUN pip install -r requirements/production.txt
+RUN pip install --no-cache-dir -r requirements/production.txt
 
 # Install JS dependencies
 WORKDIR /app/frontend
 
 COPY ./frontend/package.json /app/frontend/
-RUN $HOME/.yarn/bin/yarn install
+RUN yarn install
 
 # Add the rest of the code
 COPY . /app
 
 # Build static files
-RUN $HOME/.yarn/bin/yarn build
+RUN yarn build
 
 # Have to move all static files other than index.html to root/
 # for whitenoise middleware
