@@ -36,11 +36,6 @@ RUN #/opt/venv/bin/yarn build
 # for whitenoise middleware
 WORKDIR /app/frontend/build
 
-# Make sure the files are copied to this directory
-COPY ./*.ico ./
-COPY ./*.js ./
-COPY ./*.json ./
-
 RUN mkdir root && mv *.ico *.js *.json root
 
 # Collect static files
