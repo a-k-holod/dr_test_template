@@ -9,6 +9,9 @@ RUN apt-get -y install curl \
 
 WORKDIR /app/backend
 
+RUN pip install gunicorn
+
+
 # Install Python dependencies
 COPY ./backend/requirements /app/backend/requirements
 RUN pip install -r requirements/production.txt
@@ -43,4 +46,6 @@ RUN DJANGO_SETTINGS_MODULE=backend.settings.production \
 
 EXPOSE $PORT
 
-CMD python3 backend/manage.py runserver 0.0.0.0:$PORT
+#CMD python3 backend/manage.py runserver 0.0.0.0:$PORT
+CMD gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
+
