@@ -3,11 +3,14 @@ FROM python:latest
 
 # Install curl, node, & yarn
 RUN apt-get -y install curl \
-  && curl -sL https://deb.nodesource.com/setup_14.x | bash \
-  && apt-get install nodejs \
+  && curl -sL https://deb.nodesource.com/setup_16.x | bash \
+  && apt-get install -y nodejs \
   && curl -o- -L https://yarnpkg.com/install.sh | bash
 
 WORKDIR /app/backend
+
+RUN pip install gunicorn
+
 
 # Install Python dependencies
 COPY ./backend/requirements /app/backend/requirements
@@ -29,7 +32,7 @@ RUN $HOME/.yarn/bin/yarn build
 # for whitenoise middleware
 WORKDIR /app/frontend/build
 
-RUN mkdir root && mv *.ico *.js *.json root
+#RUN mkdir root && mv *.ico *.js *.json root
 
 # Collect static files
 RUN mkdir /app/backend/staticfiles
@@ -43,4 +46,6 @@ RUN DJANGO_SETTINGS_MODULE=backend.settings.production \
 
 EXPOSE $PORT
 
-CMD python3 backend/manage.py runserver 0.0.0.0:$PORT
+#CMD python3 backend/manage.py runserver 0.0.0.0:$PORT
+CMD gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
+
