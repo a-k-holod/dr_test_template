@@ -22,6 +22,8 @@ WORKDIR /app/frontend
 COPY ./frontend/package.json /app/frontend/
 RUN $HOME/.yarn/bin/yarn install
 
+# Copy the frontend source code
+COPY ./frontend /app/frontend
 # Add the rest of the code
 COPY . /app
 
